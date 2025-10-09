@@ -20,31 +20,23 @@ export function Footer() {
             <h4 className="text-sm font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/">
-                  <a className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-home">
-                    Home
-                  </a>
+                <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-home">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/events">
-                  <a className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-events">
-                    Events
-                  </a>
+                <Link href="/events" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-events">
+                  Events
                 </Link>
               </li>
               <li>
-                <Link href="/registration">
-                  <a className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-registration">
-                    Registration
-                  </a>
+                <Link href="/registration" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-registration">
+                  Registration
                 </Link>
               </li>
               <li>
-                <Link href="/contact">
-                  <a className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-contact">
-                    Contact
-                  </a>
+                <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-contact">
+                  Contact
                 </Link>
               </li>
             </ul>

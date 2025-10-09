@@ -163,8 +163,9 @@ export default function Registration() {
     }
   };
 
-  const currentForm = registrationType === "solo" ? soloForm : groupForm;
-  const selectedEvents = currentForm.watch("eventIds");
+  const selectedEventsSolo = soloForm.watch("eventIds");
+  const selectedEventsGroup = groupForm.watch("eventIds");
+  const selectedEvents = registrationType === "solo" ? selectedEventsSolo : selectedEventsGroup;
 
   if (isSuccess) {
     return (

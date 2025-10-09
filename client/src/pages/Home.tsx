@@ -13,15 +13,17 @@ export default function Home() {
   });
 
   const topPrizeEvents = events
-    ?.sort((a, b) => {
-      const prizeA = parseInt(a.prize.replace(/[^0-9]/g, ""));
-      const prizeB = parseInt(b.prize.replace(/[^0-9]/g, ""));
+    ?.filter((e) => e.prize)
+    .sort((a, b) => {
+      const prizeA = parseInt(a.prize?.replace(/[^0-9]/g, "") || "0");
+      const prizeB = parseInt(b.prize?.replace(/[^0-9]/g, "") || "0");
       return prizeB - prizeA;
     })
     .slice(0, 3);
 
   const mostRegisteredEvents = events
-    ?.sort((a, b) => b.participantCount - a.participantCount)
+    ?.filter((e) => e.participantCount)
+    .sort((a, b) => b.participantCount - a.participantCount)
     .slice(0, 3);
 
   return (

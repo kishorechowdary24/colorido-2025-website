@@ -436,6 +436,8 @@ export class MemStorage implements IStorage {
       this.events.set(id, {
         id,
         ...event,
+        department: event.department ?? null,
+        icon: event.icon ?? null,
         participantCount: Math.floor(Math.random() * 80) + 10,
       });
     });
@@ -451,7 +453,13 @@ export class MemStorage implements IStorage {
 
   async createEvent(insertEvent: InsertEvent): Promise<Event> {
     const id = randomUUID();
-    const event: Event = { id, ...insertEvent, participantCount: 0 };
+    const event: Event = { 
+      id, 
+      ...insertEvent, 
+      department: insertEvent.department ?? null,
+      icon: insertEvent.icon ?? null,
+      participantCount: 0 
+    };
     this.events.set(id, event);
     return event;
   }
@@ -476,7 +484,15 @@ export class MemStorage implements IStorage {
 
   async createRegistration(insertRegistration: InsertRegistration): Promise<Registration> {
     const id = randomUUID();
-    const registration: Registration = { id, ...insertRegistration };
+    const registration: Registration = { 
+      id, 
+      ...insertRegistration,
+      groupLeaderName: insertRegistration.groupLeaderName ?? null,
+      groupLeaderEmail: insertRegistration.groupLeaderEmail ?? null,
+      groupLeaderPhone: insertRegistration.groupLeaderPhone ?? null,
+      groupLeaderCollege: insertRegistration.groupLeaderCollege ?? null,
+      groupMembers: insertRegistration.groupMembers ?? null,
+    };
     this.registrations.set(id, registration);
     return registration;
   }
