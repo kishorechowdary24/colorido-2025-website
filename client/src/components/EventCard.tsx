@@ -1,6 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Users, Calendar, Clock, Trophy } from "lucide-react";
+import { Link } from "wouter";
 import type { Event } from "@shared/schema";
 import * as LucideIcons from "lucide-react";
 
@@ -28,7 +30,7 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <Card
-      className="p-6 hover-elevate active-elevate-2 transition-all duration-300 hover:shadow-lg group"
+      className="p-6 hover-elevate active-elevate-2 transition-all duration-300 hover:shadow-lg group flex flex-col h-full"
       data-testid={`card-event-${event.id}`}
     >
       <div className="flex items-start justify-between mb-4">
@@ -44,22 +46,42 @@ export function EventCard({ event }: EventCardProps) {
         {event.title}
       </h3>
 
-      <p className="text-sm text-muted-foreground mb-4 line-clamp-2" data-testid={`text-event-description-${event.id}`}>
+      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-grow" data-testid={`text-event-description-${event.id}`}>
         {event.description}
       </p>
 
       {event.department && (
         <div className="text-xs text-muted-foreground mb-3">
-          Department: {event.department}
+          {event.department}
         </div>
       )}
 
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Users className="w-4 h-4" />
-        <span data-testid={`text-participant-count-${event.id}`}>
-          {event.participantCount} registered
-        </span>
+      <div className="space-y-2 mb-4">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Calendar className="w-4 h-4" />
+          <span data-testid={`text-event-date-${event.id}`}>{event.date}</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Clock className="w-4 h-4" />
+          <span data-testid={`text-event-time-${event.id}`}>{event.time}</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+          <Trophy className="w-4 h-4" />
+          <span data-testid={`text-event-prize-${event.id}`}>{event.prize}</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Users className="w-4 h-4" />
+          <span data-testid={`text-participant-count-${event.id}`}>
+            {event.participantCount} registered
+          </span>
+        </div>
       </div>
+
+      <Link href={`/registration?eventId=${event.id}`}>
+        <Button className="w-full" size="sm" data-testid={`button-register-event-${event.id}`}>
+          Register for this Event
+        </Button>
+      </Link>
     </Card>
   );
 }

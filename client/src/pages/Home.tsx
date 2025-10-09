@@ -1,10 +1,29 @@
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { CountdownTimer } from "@/components/CountdownTimer";
-import { Calendar, MapPin, Trophy, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Trophy, ArrowRight, Users, Award } from "lucide-react";
 import coloridoPosterPath from "@assets/image_1760027545693.png";
+import type { Event } from "@shared/schema";
 
 export default function Home() {
+  const { data: events } = useQuery<Event[]>({
+    queryKey: ["/api/events"],
+  });
+
+  const topPrizeEvents = events
+    ?.sort((a, b) => {
+      const prizeA = parseInt(a.prize.replace(/[^0-9]/g, ""));
+      const prizeB = parseInt(b.prize.replace(/[^0-9]/g, ""));
+      return prizeB - prizeA;
+    })
+    .slice(0, 3);
+
+  const mostRegisteredEvents = events
+    ?.sort((a, b) => b.participantCount - a.participantCount)
+    .slice(0, 3);
+
   return (
     <div className="min-h-screen">
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero px-4 sm:px-6 lg:px-8 pt-20">
@@ -79,7 +98,7 @@ export default function Home() {
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-chart-2/20 flex items-center justify-center">
                 <span className="text-2xl">🎯</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">50+ Events</h3>
+              <h3 className="text-xl font-semibold mb-2">40+ Events</h3>
               <p className="text-sm text-muted-foreground">
                 Technical competitions, cultural performances, and sports tournaments
               </p>
@@ -104,6 +123,102 @@ export default function Home() {
                 Free participation for all events - join the celebration!
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-card">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Event Highlights
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Check out our top events with the biggest prizes and highest participation
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div>
+              <div className="flex items-center gap-2 mb-6">
+                <Award className="w-6 h-6 text-primary" />
+                <h3 className="text-2xl font-bold">Top Prize Events</h3>
+              </div>
+              <div className="space-y-4">
+                {topPrizeEvents?.map((event, index) => (
+                  <Card key={event.id} className="p-4 hover-elevate" data-testid={`card-top-prize-${index}`}>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1">{event.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-2">{event.category}</p>
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="flex items-center gap-1 text-primary font-semibold">
+                            <Trophy className="w-4 h-4" />
+                            {event.prize}
+                          </div>
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Users className="w-4 h-4" />
+                            {event.participantCount}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <Link href={`/registration?eventId=${event.id}`}>
+                          <Button size="sm" data-testid={`button-register-top-prize-${index}`}>
+                            Register
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 mb-6">
+                <Users className="w-6 h-6 text-primary" />
+                <h3 className="text-2xl font-bold">Most Popular Events</h3>
+              </div>
+              <div className="space-y-4">
+                {mostRegisteredEvents?.map((event, index) => (
+                  <Card key={event.id} className="p-4 hover-elevate" data-testid={`card-popular-${index}`}>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1">{event.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-2">{event.category}</p>
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="flex items-center gap-1 text-primary font-semibold">
+                            <Users className="w-4 h-4" />
+                            {event.participantCount} registered
+                          </div>
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Trophy className="w-4 h-4" />
+                            {event.prize}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <Link href={`/registration?eventId=${event.id}`}>
+                          <Button size="sm" data-testid={`button-register-popular-${index}`}>
+                            Register
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link href="/events">
+              <Button size="lg" variant="outline" data-testid="button-view-all-events">
+                View All 40+ Events
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
