@@ -1,0 +1,102 @@
+Build a modern, responsive, and interactive event website for Colorido 2025, inspired by Colorido 2024
+ with the following requirements:
+
+Frontend Tech: React.js + TailwindCSS (or Material-UI).
+
+Pages:
+
+Home
+
+Events
+
+Registration
+
+Hospitality & Transportation
+
+Contact
+
+Features:
+
+Hero section on homepage with event title, dates, and "Register Now" button
+
+Live countdown timer to the event date
+
+Interactive event cards:
+
+Hover effects
+
+Show number of registered participants (updates automatically after registration)
+
+Filter events by category
+
+Search bar for events
+
+Registration form (link to Google Forms) with input fields: name, email, phone, college, event selection, accommodation, transportation
+
+Responsive design for desktop and mobile
+
+Smooth scrolling, transitions, and animations
+
+Navbar with links to all pages
+
+Footer with:
+
+Contact details same as Colorido 2024
+
+RVR & JC College location (link to Google Maps: https://www.google.com/maps/place/R.V.R.+%26+J.C.College+of+Engineering/@16.2550606,80.6335915)
+
+Instagram and LinkedIn page links
+
+Use a modern, attractive color palette, avoid bright colors
+
+Accessibility compliant (WCAG standards)
+
+Components to create:
+
+Navbar
+
+Footer
+
+EventCard
+
+CountdownTimer
+
+RegistrationForm
+
+Additional Features:
+
+Event registration count increments dynamically when a user registers
+
+Use smooth hover effects, transitions, and animations for interactivity
+
+Design & UX:
+
+Modern, professional, interactive interface
+
+Subtle, pleasing color scheme (pastel, muted, or gradient tones)
+
+Mobile-first design
+
+Backend Integration (Optional for advanced version):
+
+Use APIs to fetch events and registration counts (mock JSON or Firebase/REST API)
+
+Submission of registration updates the count
+
+Output Requirements for Bolt.new:
+
+Full React project structure with components, pages, and TailwindCSS styling
+
+Include instructions for running locally and deployment
+
+Ensure all external links (Google Maps, social media, Google Forms) are included
+
+No bright colors, no stock images for events, use placeholders or icons if needed
+
+Extra Bonus Features (Optional):
+
+Admin dashboard for event and registration management
+
+Photo gallery of past events
+
+Analytics for registrations
