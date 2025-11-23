@@ -1,0 +1,37 @@
+/* Default text color for nav links (before scrolling) */
+.nav-link {
+  color: #c0597b; /* Maroon */
+  transition: color 0.3s ease;
+}
+
+/* Text color after scrolling */
+.nav-link.scrolled {
+  color: white;
+}
+
+/* Logo text color */
+.nav-logo {
+  color: #c0597b; /* Maroon */
+  font-weight: bold;
+  font-family: monospace;
+  transition: color 0.3s ease;
+}
+
+.nav-logo.scrolled {
+  color: white;
+}
+
+/* Mobile menu links */
+.mobile-nav-link {
+  color: #c0597b; /* Maroon */
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-link.scrolled {
+  color: white;
+}
+
+/* Register button always white */
+.register-btn {
+  color: #c0597b;
+}

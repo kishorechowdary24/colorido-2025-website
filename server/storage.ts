@@ -24,7 +24,6 @@ export class MemStorage implements IStorage {
 
   private seedEvents() {
     const sampleEvents: InsertEvent[] = [
-      // TECHNICAL EVENTS (15 events)
       {
         title: "Techno Fiesta",
         description: "Technical paper presentation and project exhibition showcasing innovative ideas and cutting-edge technology",
@@ -176,7 +175,6 @@ export class MemStorage implements IStorage {
         icon: "BarChart",
       },
 
-      // CULTURAL EVENTS (15 events)
       {
         title: "Dance Fusion",
         description: "Electrifying solo and group dance performances across classical, contemporary, and fusion genres",

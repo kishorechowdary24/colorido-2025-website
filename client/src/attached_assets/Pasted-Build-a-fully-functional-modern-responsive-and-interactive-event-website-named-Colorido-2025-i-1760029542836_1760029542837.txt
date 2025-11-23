@@ -1,0 +1,125 @@
+Build a fully functional, modern, responsive, and interactive event website named "Colorido 2025", inspired by the Colorido 2024 website (https://rvrjcce.ac.in/colorido2024/) and the reference deployment (https://modern-responsive-ev-2tfy.bolt.host/). Use React.js for frontend and Tailwind CSS (or Material-UI) for styling. Follow best practices for accessibility, responsiveness, smooth animations, and interactivity. 
+
+FRONTEND REQUIREMENTS:
+
+1. Pages:
+   - Home
+   - Events
+   - Registration
+   - Hospitality & Transportation
+   - Contact
+
+2. Components:
+   - Navbar: Fixed top, collapsible for mobile, smooth scrolling to sections.
+   - Footer: College address, social links (Instagram, LinkedIn), quick links to pages.
+   - EventCard: Interactive hover effects, shows event name, category, date, top prize, and total registrations.
+   - CountdownTimer: Shows live countdown to event start.
+   - RegistrationForm: Form with tabs for solo or group registration. Input validation included.
+   - HighlightSection: For top events, most registered events, or events with high prizes.
+   - SearchBar: Filter events by name or category in the Events page.
+   - FilterDropdown: Categories filter in Events page (e.g., cultural, technical, sports).
+   - GoogleMapEmbed: Shows the exact college location.
+   - ContactForm: Allows users to contact organizers/coordinators.
+
+3. Home Page:
+   - Hero section with the event title ("Colorido 2025"), dates, and a centered "Register Now" button.
+   - Countdown timer below the hero section.
+   - Highlight section showcasing top events, highest prizes, or most registered events.
+   - Smooth scroll navigation to other sections (Events, Registration, Hospitality, Contact).
+   - Attractive modern color palette, avoid overly bright colors, use gradient highlights similar to Colorido 2024.
+   - Responsive design for mobile, tablet, and desktop.
+
+4. Events Page:
+   - Display 40 events across different categories using EventCard components.
+   - Include SearchBar to search by event name.
+   - Include FilterDropdown to filter by event categories.
+   - Interactive hover animations on cards.
+   - Clicking "Register" on an event opens the Registration page with that event pre-selected and other events disabled.
+
+5. Registration Page:
+   - Tabs for Solo Performance and Group Performance.
+   - Solo Tab: Inputs - Name, Email, Phone, College, Event selection (pre-selected from clicked event), Accommodation, Transportation.
+   - Group Tab: Inputs - 
+        - Group Leader: Full details (Name, Email, Phone, College)
+        - Group Members: Names and Roll Numbers only
+        - Event selection (pre-selected), Accommodation, Transportation
+   - Form validation: Required fields, email format, phone number format.
+   - Smooth transition between Solo and Group tabs.
+   - Submit button sends data to backend via API call.
+
+6. Hospitality & Transportation Page:
+   - Use content as in Colorido 2024 reference, but update style with modern design.
+   - Include sections for accommodation details, transportation schedule, and FAQs.
+   - Use attractive cards or sections with icons and subtle animations.
+
+7. Contact Page:
+   - Display college address, Google Map embed, Instagram and LinkedIn links.
+   - List coordinators and event organizers with names, emails, and phone numbers.
+   - ContactForm: Name, Email, Message, Submit button.
+   - Responsive layout with easy-to-read typography.
+
+8. Animations & UX:
+   - Smooth scrolling for internal links.
+   - Fade-in and slide animations for sections.
+   - Hover effects on buttons and event cards.
+   - Countdown timer updates live in real time.
+   - Ensure WCAG accessibility standards (contrast, readable fonts, keyboard navigation).
+
+BACKEND REQUIREMENTS (Node.js + Express.js + MongoDB/PostgreSQL):
+
+1. API Routes:
+/api/events
+   - GET all events
+   - GET single event by ID
+   - POST create event
+   - PUT update event
+   - DELETE event
+/api/registrations
+   - POST registration (solo or group)
+   - GET all registrations (admin)
+   - GET single registration by ID
+   - Send automated confirmation email on successful registration
+
+2. Database Models:
+   - Events: name, category, date, time, description, prize, totalRegistrations, image (optional)
+   - Registrations: solo/group, eventId, participant details, groupMembers (if group), accommodation, transportation, timestamp
+
+3. Input validation, sanitization, and error handling in all routes.
+
+DEPLOYMENT:
+
+1. Frontend: Deployable on Vercel, Netlify, or Bolt.
+2. Backend: Deployable on Render, Railway, or Heroku.
+3. Use environment variables for database URI, email credentials, and other sensitive data.
+
+BONUS FEATURES:
+
+1. Admin Dashboard:
+   - Manage events and registrations.
+   - View top registered events and statistics.
+2. Gallery Section:
+   - Photo gallery of past events with lightbox view.
+3. Analytics:
+   - Registration analytics per event (most popular, total registrations).
+
+INSTRUCTIONS:
+
+- Use modular React components for all sections.
+- Keep code clean, readable, and well-commented.
+- Ensure responsive design for all screen sizes.
+- Include smooth scrolling, hover effects, and animated highlights.
+- API integration: Fetch events for Events page and submit registrations via backend.
+- Home page should highlight key info: top events, prizes, and most registered events in a visually appealing center-aligned layout.
+
+COLOR PALETTE & STYLE:
+
+- Use modern, subtle gradients and shades, avoid bright neon colors.
+- Maintain aesthetic consistency with Colorido 2024 reference.
+- Ensure good contrast for accessibility and readability.
+
+END GOAL:
+
+- Full frontend React project with Tailwind styling, components, and pages.
+- Full backend Node.js/Express project with routes, controllers, models, and email notifications.
+- Instructions to run locally and deploy.
+- Fully responsive, interactive, and visually appealing website for "Colorido 2025".

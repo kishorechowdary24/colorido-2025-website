@@ -3,6 +3,8 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertRegistrationSchema } from "@shared/schema";
 import { z } from "zod";
+import adminRoutes from "./routes/admin";
+import eventRoutes from "./routes/events";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/events", async (_req, res) => {
@@ -51,7 +53,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: "Failed to fetch registrations" });
     }
   });
-
+  app.use("/api/admin", adminRoutes);
+  app.use("/api/events", eventRoutes);
   const httpServer = createServer(app);
   return httpServer;
 }

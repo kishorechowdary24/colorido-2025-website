@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { CountdownTimer } from "@/components/CountdownTimer";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { CountdownTimer } from "../components/CountdownTimer";
 import { Calendar, MapPin, Trophy, ArrowRight, Users, Award } from "lucide-react";
-import coloridoPosterPath from "@assets/image_1760027545693.png";
+import coloridoPosterPath from "../attached_assets/image_1760027545693.png";
 import type { Event } from "@shared/schema";
 
 export default function Home() {
@@ -23,11 +23,11 @@ export default function Home() {
 
   const mostRegisteredEvents = events
     ?.filter((e) => e.participantCount)
-    .sort((a, b) => b.participantCount - a.participantCount)
+    .sort((a, b) => (b.participantCount ?? 0) - (a.participantCount ?? 0))
     .slice(0, 3);
-
   return (
     <div className="min-h-screen">
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero px-4 sm:px-6 lg:px-8 pt-20">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -35,6 +35,7 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-6xl mx-auto text-center">
+          {/* Poster */}
           <div className="mb-8 md:mb-12 flex justify-center">
             <img
               src={coloridoPosterPath}
@@ -44,39 +45,51 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 text-foreground/90">
+          {/* Event Info */}
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 text-white">
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-primary" />
-              <span className="text-sm md:text-base font-medium" data-testid="text-event-dates">
+              <Calendar className="w-5 h-5 text-white" />
+              <span className="text-sm md:text-base font-medium">
                 December 17-18, 2025
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-primary" />
+              <MapPin className="w-5 h-5 text-white" />
               <span className="text-sm md:text-base font-medium">RVR & JC College</span>
             </div>
             <div className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-primary" />
+              <Trophy className="w-5 h-5 text-white" />
               <span className="text-sm md:text-base font-medium">₹5,00,000 Prizes</span>
             </div>
           </div>
 
+          {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Link href="/registration">
-              <Button size="lg" className="w-full sm:w-auto group" data-testid="button-register-hero">
-                Register Now
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+            <Button
+              size="lg"
+              className="w-full sm:w-auto group bg-maroon text-white hover:bg-[hsla(353, 22%, 93%, 1.00)] transition-colors"
+              data-testid="button-register-hero"
+            >
+              Register Now
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
             </Link>
             <Link href="/events">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto backdrop-blur-sm bg-background/10" data-testid="button-explore-events">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto backdrop-blur-sm bg-background/10 text-white"
+                data-testid="button-explore-events"
+              >
                 Explore Events
               </Button>
             </Link>
           </div>
 
+          {/* Countdown */}
           <div className="mb-8">
-            <p className="text-sm md:text-base text-muted-foreground mb-6 uppercase tracking-wider font-semibold">
+            <p className="text-sm md:text-base text-white mb-6 uppercase tracking-wider font-semibold">
               Event Starts In
             </p>
             <CountdownTimer />
@@ -84,6 +97,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Attend Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -129,6 +143,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Event Highlights Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-card">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -141,6 +156,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Top Prize Events */}
             <div>
               <div className="flex items-center gap-2 mb-6">
                 <Award className="w-6 h-6 text-primary" />
@@ -177,6 +193,7 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Most Popular Events */}
             <div>
               <div className="flex items-center gap-2 mb-6">
                 <Users className="w-6 h-6 text-primary" />
@@ -214,6 +231,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* View All Events Button */}
           <div className="text-center">
             <Link href="/events">
               <Button size="lg" variant="outline" data-testid="button-view-all-events">

@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { EventCard } from "@/components/EventCard";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { EventCard } from "../components/EventCard";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 import { Search, Filter } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "../components/ui/skeleton";
 import type { Event } from "@shared/schema";
 
 export default function Events() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const { data: events, isLoading } = useQuery<Event[]>({
     queryKey: ["/api/events"],
   });
 
-  const categories = ["all", "Technical", "Cultural", "Sports"];
+  const categories = ["All", "Technical", "Cultural", "Sports"];
 
   const filteredEvents = events?.filter((event) => {
     const matchesSearch =
@@ -24,7 +24,7 @@ export default function Events() {
       event.department?.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory =
-      selectedCategory === "all" ||
+      selectedCategory === "All" ||
       event.category.toLowerCase() === selectedCategory.toLowerCase();
 
     return matchesSearch && matchesCategory;
@@ -33,6 +33,7 @@ export default function Events() {
   return (
     <div className="min-h-screen pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        {/* Page Header */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Events</h1>
           <p className="text-muted-foreground text-lg">
@@ -40,9 +41,11 @@ export default function Events() {
           </p>
         </div>
 
-        <div className="sticky top-20 z-10 bg-background/80 backdrop-blur-md py-6 mb-8 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 border-b border-border">
+        {/* Search & Filter Section (non-sticky, no floating effect) */}
+        <div className="relative bg-background/80 py-6 mb-8 border-b border-border">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-4 mb-6">
+              {/* Search Input */}
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -54,6 +57,8 @@ export default function Events() {
                   data-testid="input-search-events"
                 />
               </div>
+
+              {/* Category Filters */}
               <div className="flex items-center gap-2">
                 <Filter className="w-5 h-5 text-muted-foreground md:hidden" />
                 <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
@@ -73,18 +78,18 @@ export default function Events() {
               </div>
             </div>
 
+            {/* Events Count */}
             <div className="text-sm text-muted-foreground">
               {isLoading ? (
                 "Loading events..."
               ) : (
-                <>
-                  Showing {filteredEvents?.length || 0} of {events?.length || 0} events
-                </>
+                <>Showing {filteredEvents?.length || 0} of {events?.length || 0} events</>
               )}
             </div>
           </div>
         </div>
 
+        {/* Event Cards */}
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (

@@ -56,7 +56,7 @@ export function Footer() {
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <a
-                  href="https://www.google.com/maps/place/R.V.R.+%26+J.C.College+of+Engineering/@16.2550606,80.6335915"
+                  href="https://www.google.com/maps/place/R.V.R.+%26+J.C.College+of+Engineering/@16.2550606,80.3214494,17z/data=!3m1!4b1!4m6!3m5!1s0x3a4a76e740000001:0xc41c8498715c6da0!8m2!3d16.2550606!4d80.3240243!16zL20vMGZ3Z3J4?entry=ttu&g_ep=EgoyMDI1MTAwNy4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
@@ -72,7 +72,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-3">
               <a
-                href="https://www.instagram.com/colorido2025"
+                href="https://www.instagram.com/rvrjcce.official?igsh=MXNrM3k5MzB6ZHJpNw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-muted hover-elevate active-elevate-2 transition-all"
@@ -82,7 +82,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://www.linkedin.com/company/colorido2025"
+                href="https://www.linkedin.com/school/r.v.r.-&-j.c.-college-of-engineering/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-muted hover-elevate active-elevate-2 transition-all"

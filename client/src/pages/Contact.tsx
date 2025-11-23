@@ -1,11 +1,64 @@
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Card } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { Button } from "../components/ui/button";
 import { Mail, Phone, MapPin, Clock, Instagram } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
 
 export default function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setShowError(null);
+
+    // Basic validation (you can extend)
+    if (!name || !email || !message) {
+      setShowError("Please fill name, email and message.");
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      // ---- Replace below with real API call ----
+      // Example:
+      // await fetch("/api/contact", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ name, email, subject, message }),
+      // });
+
+      // Simulate a network delay
+      await new Promise((res) => setTimeout(res, 800));
+      // ------------------------------------------
+
+      // show success toast
+      setShowSuccess(true);
+
+      // clear form (optional)
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+
+      // auto-dismiss success after 3s
+      setTimeout(() => setShowSuccess(false), 3000);
+    } catch (err) {
+      console.error(err);
+      setShowError("Failed to send message. Please try again later.");
+    } finally {
+      setIsSending(false);
+    }
+  }
+
   return (
     <div className="min-h-screen pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -133,20 +186,41 @@ export default function Contact() {
 
           <Card className="p-6 md:p-8 h-fit">
             <h2 className="text-xl font-semibold mb-6">Send us a Message</h2>
-            <form className="space-y-6">
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {showError && (
+                <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">{showError}</div>
+              )}
+
               <div>
                 <label className="text-sm font-medium mb-2 block">Name</label>
-                <Input placeholder="Your name" data-testid="input-contact-name" />
+                <Input
+                  placeholder="Your name"
+                  data-testid="input-contact-name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Email</label>
-                <Input type="email" placeholder="your.email@example.com" data-testid="input-contact-email" />
+                <Input
+                  type="email"
+                  placeholder="your.email@example.com"
+                  data-testid="input-contact-email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Subject</label>
-                <Input placeholder="What's this about?" data-testid="input-contact-subject" />
+                <Input
+                  placeholder="What's this about?"
+                  data-testid="input-contact-subject"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                />
               </div>
 
               <div>
@@ -155,15 +229,51 @@ export default function Contact() {
                   placeholder="Tell us more..."
                   className="min-h-[150px] resize-none"
                   data-testid="input-contact-message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full" data-testid="button-send-message">
-                Send Message
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full"
+                data-testid="button-send-message"
+                disabled={isSending}
+              >
+                {isSending ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>
         </div>
+      </div>
+
+      {/* Success toast (positioned bottom-right) */}
+      <div
+        aria-live="polite"
+        className="fixed bottom-6 right-6 z-50 flex items-end justify-end pointer-events-none"
+      >
+        {showSuccess && (
+          <div
+            className="pointer-events-auto bg-white border border-border shadow-lg rounded-lg px-5 py-3 flex items-center gap-3"
+            role="status"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p className="font-medium text-sm">Message sent</p>
+              <p className="text-xs text-muted-foreground">Thanks — we'll get back to you soon.</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
